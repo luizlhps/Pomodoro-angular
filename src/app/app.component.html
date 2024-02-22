@@ -1,11 +1,22 @@
 <main class="main">
   <div class="main__content">
-    <div class="main__content__timer">
+    <h1>Pomodoro</h1>
+    <h2>Seja Produtivo do jeito certo!</h2>
+
+    <span class="main__content_divider"></span>
+    <div class="main__content__options">
+      <button (click)="pomorodoClock()">Pomodoro</button>
+      <button (click)="shortBreakClock()">Descanso</button>
+      <button (click)="longBreakClock()">Descanso Longo</button>
+    </div>
+    <div (click)="startTimeDecrease()" class="main__content__timer">
       <div class="main__content__timer__circle"></div>
       <h1 class="main__content__timer__time">{{ formattedSeconds }}</h1>
     </div>
     <div class="main__content__button">
-      <button (click)="startTimeDecrease()">{{ buttonText }}</button>
+      <button (click)="startTimeDecrease()">
+        <span>{{ buttonText }}</span>
+      </button>
     </div>
   </div>
 </main>

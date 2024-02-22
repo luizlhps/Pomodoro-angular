@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { multicast } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   buttonText: string = 'Iniciar';
   twentyFiveMinutesInSeconds: number = 25 * 60;
+  fiveMinutesInSeconds: number = 5 * 60;
+  fifteenMinutesInSeconds: number = 15 * 60;
   seconds: number = this.twentyFiveMinutesInSeconds;
   formattedSeconds: string = this.formatTime(this.seconds);
   pomodoroStart: boolean = false;
@@ -20,6 +23,7 @@ export class AppComponent {
 
   private formatTime(seconds: number): string {
     const minutes: number = Math.floor(seconds / 60);
+
     const remainingSeconds: number = seconds % 60;
     const formattedMinutes: string =
       minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -30,6 +34,28 @@ export class AppComponent {
 
   private updateFormattedSeconds() {
     this.formattedSeconds = this.formatTime(this.seconds);
+  }
+
+  pomorodoClock() {
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.buttonText = 'Iniciar';
+    this.seconds = this.twentyFiveMinutesInSeconds;
+    this.updateFormattedSeconds();
+  }
+  shortBreakClock() {
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.buttonText = 'Iniciar';
+    this.seconds = this.fiveMinutesInSeconds;
+    this.updateFormattedSeconds();
+  }
+  longBreakClock() {
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.buttonText = 'Iniciar';
+    this.seconds = this.fifteenMinutesInSeconds;
+    this.updateFormattedSeconds();
   }
 
   startTimeDecrease() {
@@ -52,6 +78,8 @@ export class AppComponent {
         clearInterval(this.interval);
         this.seconds = 0;
         this.buttonText = 'Iniciar';
+        this.seconds = this.twentyFiveMinutesInSeconds;
+        this.updateFormattedSeconds();
         console.log('Timer finalizado!');
         return;
       }
