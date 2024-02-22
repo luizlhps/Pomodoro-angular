@@ -2,10 +2,10 @@
   <div class="main__content">
     <div class="main__content__timer">
       <div class="main__content__timer__circle"></div>
-      <h1 class="main__content__timer__time">25:00</h1>
+      <h1 class="main__content__timer__time">{{ formattedSeconds }}</h1>
     </div>
     <div class="main__content__button">
-      <span>Iniciar</span>
+      <button (click)="startTimeDecrease()">{{ buttonText }}</button>
     </div>
   </div>
 </main>
