@@ -5,9 +5,24 @@
 
     <span class="main__content_divider"></span>
     <div class="main__content__options">
-      <button (click)="pomorodoClock()">Pomodoro</button>
-      <button (click)="shortBreakClock()">Descanso</button>
-      <button (click)="longBreakClock()">Descanso Longo</button>
+      <button
+        [ngClass]="{ active_button: mode === 'pomodoro' }"
+        (click)="pomorodoClock()"
+      >
+        Pomodoro
+      </button>
+      <button
+        [ngClass]="{ active_button: mode === 'shortBreak' }"
+        (click)="shortBreakClock()"
+      >
+        Descanso
+      </button>
+      <button
+        [ngClass]="{ active_button: mode === 'longBreak' }"
+        (click)="longBreakClock()"
+      >
+        Descanso Longo
+      </button>
     </div>
     <div (click)="startTimeDecrease()" class="main__content__timer">
       <div class="main__content__timer__circle"></div>

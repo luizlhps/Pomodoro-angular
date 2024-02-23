@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { multicast } from 'rxjs';
@@ -5,11 +6,12 @@ import { multicast } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  mode: 'shortBreak' | 'longBreak' | 'pomodoro' = 'pomodoro';
   buttonText: string = 'Iniciar';
   twentyFiveMinutesInSeconds: number = 25 * 60;
   fiveMinutesInSeconds: number = 5 * 60;
@@ -37,6 +39,7 @@ export class AppComponent {
   }
 
   pomorodoClock() {
+    this.mode = 'pomodoro';
     clearInterval(this.interval);
     this.seconds = 0;
     this.buttonText = 'Iniciar';
@@ -44,6 +47,7 @@ export class AppComponent {
     this.updateFormattedSeconds();
   }
   shortBreakClock() {
+    this.mode = 'shortBreak';
     clearInterval(this.interval);
     this.seconds = 0;
     this.buttonText = 'Iniciar';
@@ -51,6 +55,7 @@ export class AppComponent {
     this.updateFormattedSeconds();
   }
   longBreakClock() {
+    this.mode = 'longBreak';
     clearInterval(this.interval);
     this.seconds = 0;
     this.buttonText = 'Iniciar';
