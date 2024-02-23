@@ -23,6 +23,15 @@ export class AppComponent {
 
   constructor() {}
 
+  soundAlert() {
+    let audioPlayer: HTMLAudioElement;
+
+    audioPlayer = new Audio();
+    audioPlayer.src = 'assets/alert.mp3';
+    audioPlayer.volume = 0.3;
+    return audioPlayer;
+  }
+
   private formatTime(seconds: number): string {
     const minutes: number = Math.floor(seconds / 60);
 
@@ -83,9 +92,14 @@ export class AppComponent {
         clearInterval(this.interval);
         this.seconds = 0;
         this.buttonText = 'Iniciar';
-        this.seconds = this.twentyFiveMinutesInSeconds;
-        this.updateFormattedSeconds();
-        console.log('Timer finalizado!');
+
+        /* mode as pomodoro, short break and long break */
+        if (this.mode === 'pomodoro') this.pomorodoClock();
+        if (this.mode === 'longBreak') this.longBreakClock();
+        if (this.mode === 'shortBreak') this.shortBreakClock();
+
+        this.soundAlert().play();
+
         return;
       }
 
